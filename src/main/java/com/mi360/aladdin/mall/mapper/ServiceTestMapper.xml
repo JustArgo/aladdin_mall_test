@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mi360.aladdin.mall.mapper.ServiceTestMapper" >
+  <resultMap id="BaseResultMap" type="com.mi360.aladdin.mall.domain.ServiceTest" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="methodName" property="methodName" jdbcType="VARCHAR" />
+    <result column="serviceName" property="serviceName" jdbcType="VARCHAR" />
+    <result column="serviceCode" property="serviceCode" jdbcType="VARCHAR" />
+    <result column="methodUrl" property="methodUrl" jdbcType="VARCHAR" />
+    <result column="paramData" property="paramData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, methodName, serviceName, serviceCode, methodUrl, paramData
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_service_test
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_service_test
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mi360.aladdin.mall.domain.ServiceTest" >
+    insert into t_service_test (ID, methodName, serviceName, 
+      serviceCode, methodUrl, paramData
+      )
+    values (#{ID,jdbcType=INTEGER}, #{methodName,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
+      #{serviceCode,jdbcType=VARCHAR}, #{methodUrl,jdbcType=VARCHAR}, #{paramData,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mi360.aladdin.mall.domain.ServiceTest" >
+    insert into t_service_test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="methodName != null" >
+        methodName,
+      </if>
+      <if test="serviceName != null" >
+        serviceName,
+      </if>
+      <if test="serviceCode != null" >
+        serviceCode,
+      </if>
+      <if test="methodUrl != null" >
+        methodUrl,
+      </if>
+      <if test="paramData != null" >
+        paramData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCode != null" >
+        #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="methodUrl != null" >
+        #{methodUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paramData != null" >
+        #{paramData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mi360.aladdin.mall.domain.ServiceTest" >
+    update t_service_test
+    <set >
+      <if test="methodName != null" >
+        methodName = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        serviceName = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCode != null" >
+        serviceCode = #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="methodUrl != null" >
+        methodUrl = #{methodUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paramData != null" >
+        paramData = #{paramData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mi360.aladdin.mall.domain.ServiceTest" >
+    update t_service_test
+    set methodName = #{methodName,jdbcType=VARCHAR},
+      serviceName = #{serviceName,jdbcType=VARCHAR},
+      serviceCode = #{serviceCode,jdbcType=VARCHAR},
+      methodUrl = #{methodUrl,jdbcType=VARCHAR},
+      paramData = #{paramData,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllService" resultType="map">
+  	select DISTINCT(serviceCode),serviceName from t_service_test
+  </select>
+  <select id="selectByServiceCode" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from t_service_test
+  	where serviceCode = #{serviceCode}
+  </select>
+</mapper>

@@ -1,0 +1,135 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+		<script>
+			$(function(){
+					
+				$.ajax({
+					url:"/test/prepare",
+					dataType:'json',
+					success:function(ret){
+						var services = ret.services;
+						console.log("services:"+services)
+						for(var i=0;i<services.length;i++){
+							$("#service").append("<option value='"+services[i].serviceCode+"'>"+services[i].serviceName+"</option>");
+						}
+						
+						
+						$.ajax({
+							url:"/test/find-by-service-code",
+							data:{"serviceCode":$("#service option:eq(0)").val()},
+							dataType:"json",
+							success:function(ret){
+								console.log("length:"+ret.length);
+								for(var i=0;i<ret.length;i++){
+									$("#method").append("<option value='"+ret[i].methodUrl+"' data-param='"+ret[i].paramData+"'>"+ret[i].methodName+"</option>");
+								}
+								
+								$(".url").val($("#method option:eq(0)").val());
+								$(".params").text(JSON.stringify($("#method option:eq(0)").data("param"),null,"\t"));
+								
+							}
+						});
+						
+						
+						
+					}
+				});
+				
+				$("#service").change(function(){
+					var _this = $(this);
+					$("#method").empty();
+					$.ajax({
+						url:"/test/find-by-service-code",
+						data:{"serviceCode":_this.val()},
+						dataType:"json",
+						success:function(ret){
+							for(var i=0;i<ret.length;i++){
+								$("#method").append("<option value='"+ret[i].methodUrl+"' data-param='"+ret[i].paramData+"'>"+ret[i].methodName+"</option>");
+							}
+							
+							$(".url").val($("#method option:eq(0)").val());
+							$(".params").text(JSON.stringify($("#method option:eq(0)").data("param"),null,"\t"));
+							
+							
+						}
+					});
+				});
+				
+				$("#method").change(function(){
+					var option = $(this).find("option:selected");
+					
+					$(".url").val(option.val());
+					$(".params").text(JSON.stringify(option.data("param"),null,"\t"));
+					
+				});
+				
+			});
+		</script>
+	</head>
+	
+	<body>
+		
+		服务:<select id="service">
+				
+			</select>
+			
+		方法:<select id="method">
+			
+		</select>	
+			<br/>
+			
+			
+			<div class="param">
+					
+					url:<input type="text" class="url" name="url" /><br/>
+					<br/>
+					<br/>
+					参数:<textarea class="params" rows="10" cols="80">
+					
+					</textarea><br/>
+					<br/>
+					<br/>
+					<input type="button" onclick="test()" value="测试"/>
+					
+			</div>
+		
+		
+		
+		返回：<pre class="result">
+			
+		</pre>
+		
+	</body>
+	<script type="text/javascript">
+		
+		function test(){
+			
+			$(".result").empty();
+			
+			var param = $(".params").val();
+			
+			var paramObj = JSON.parse(param);
+			for(var pro in paramObj){
+				console.log(pro+":"+paramObj[pro]);
+			}
+			
+			var url = $(".url").val();
+			console.log(url);
+			
+			$.ajax({
+				url:url,
+				data:paramObj,
+				dataType:"json",
+				success:function(ret){
+					$(".result").append(JSON.stringify(ret, null, 4));
+				}
+			});
+			
+			
+		}
+		
+		
+	</script>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="dailyINFO" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/info.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [ %t ] - [ %p ] [%c] %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+	<appender name="asyncDailyINFO" class="org.apache.log4j.AsyncAppender">
+		<param name="BufferSize" value="0" />
+		<appender-ref ref="dailyINFO" />
+	</appender>
+
+	<appender name="dailyDubbo" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/dubbo.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %t [%c] %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+	<logger name="com.alibaba.dubbo" additivity="false">
+		<level value="error" />
+		<appender-ref ref="dailyDubbo" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="asyncDailyINFO" />
+	</root>
+
+</log4j:configuration>
