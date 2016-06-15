@@ -49,5 +49,20 @@ public class TestController {
 		
 	}
 	
+	@RequestMapping("/add-method")
+	public String add(String requestId, String methodName, String methodUrl, String paramData, String serviceName, String serviceCode){
+		
+		ServiceTest serviceTest = new ServiceTest();
+		serviceTest.setMethodName(methodName);
+		serviceTest.setMethodUrl(methodUrl);
+		serviceTest.setParamData(paramData);
+		serviceTest.setServiceCode(serviceCode);
+		serviceTest.setServiceName(serviceName);
+		
+		serviceTestMapper.insertSelective(serviceTest);
+		
+		return "home";
+		
+	}
 	
 }
