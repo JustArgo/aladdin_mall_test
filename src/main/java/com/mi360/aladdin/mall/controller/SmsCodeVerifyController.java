@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mi360.aladdin.message.sms.service.SmsCodeVerifyService;
 
 @Controller
-@RequestMapping("/emailVerify")
+@RequestMapping("/smsCodeVerify")
 public class SmsCodeVerifyController {
 	@Autowired
 	private SmsCodeVerifyService smsCodeVerifyService;
