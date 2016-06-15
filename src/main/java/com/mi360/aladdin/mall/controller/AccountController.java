@@ -21,7 +21,7 @@ public class AccountController {
 
 	@RequestMapping("/checkWithdrawCondition")
 	@ResponseBody
-	private Map<String, Object> createPc(String requestId, String type, Long money, String mqId, Integer bankCardId) {
+	private Map<String, Object> checkWithdrawCondition(String requestId, String type, Long money, String mqId, Integer bankCardId) {
 		return pcAccountService.checkWithdrawCondition(requestId, type, money, mqId, bankCardId);
 	}
 
