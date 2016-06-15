@@ -52,20 +52,20 @@ public class UserController {
 		return pcUserService.modifyLoginPassword(requestId, mqId, prePassword, password);
 	}
 
-	@RequestMapping("/createPc")
+	@RequestMapping("/modifyPaymentPassword")
 	@ResponseBody
 	private Map<String, Object> modifyPaymentPassword(String requestId, String mqId, String password,
 			String prePassword) {
 		return pcUserService.modifyPaymentPassword(requestId, mqId, prePassword, password);
 	}
 
-	@RequestMapping("/createPc")
+	@RequestMapping("/registerActivation")
 	@ResponseBody
 	private Map<String, Object> registerActivation(String requestId, String mqId) {
 		return pcUserService.registerActivation(requestId, mqId);
 	}
 
-	@RequestMapping("/createPc")
+	@RequestMapping("/savePc")
 	@ResponseBody
 	private Map<String, Object> savePc(String requestId, String mqId, String headImage, String nickname, Integer sex) {
 		return pcUserService.savePc(requestId, mqId, headImage, nickname, sex);
