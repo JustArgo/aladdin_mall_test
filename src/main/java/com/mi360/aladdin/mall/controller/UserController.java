@@ -21,9 +21,9 @@ public class UserController {
 		return pcUserService.createPc(requestId, password, phone, email);
 	}
 
-	@RequestMapping("/createPc")
+	@RequestMapping("/existEmail")
 	@ResponseBody
-	private Map<String, Object> createPc(String requestId, String email) {
+	private Map<String, Object> existEmail(String requestId, String email) {
 		return pcUserService.existEmail(requestId, email);
 	}
 
@@ -41,7 +41,7 @@ public class UserController {
 
 	@RequestMapping("/loginAuthentication")
 	@ResponseBody
-	private Map<String, Object> createPc(String requestId, String password, String mqId, String phone, String email) {
+	private Map<String, Object> loginAuthentication(String requestId, String password, String mqId, String phone, String email) {
 		return pcUserService.loginAuthentication(requestId, password, mqId, phone, email);
 	}
 
