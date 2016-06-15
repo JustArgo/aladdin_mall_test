@@ -26,7 +26,7 @@
 									$("#method").append("<option value='"+ret[i].methodUrl+"' data-param='"+ret[i].paramData+"'>"+ret[i].methodName+"</option>");
 								}
 								
-								$(".url").val($("#method option:eq(0)").val());
+								$(".url").val("/test"+$("#method option:eq(0)").val());
 								$(".params").text(JSON.stringify($("#method option:eq(0)").data("param"),null,"\t"));
 								
 							}
@@ -49,7 +49,7 @@
 								$("#method").append("<option value='"+ret[i].methodUrl+"' data-param='"+ret[i].paramData+"'>"+ret[i].methodName+"</option>");
 							}
 							
-							$(".url").val($("#method option:eq(0)").val());
+							$(".url").val("/test"+$("#method option:eq(0)").val());
 							$(".params").text(JSON.stringify($("#method option:eq(0)").data("param"),null,"\t"));
 							
 							
@@ -60,7 +60,7 @@
 				$("#method").change(function(){
 					var option = $(this).find("option:selected");
 					
-					$(".url").val(option.val());
+					$(".url").val("/test"+option.val());
 					$(".params").text(JSON.stringify(option.data("param"),null,"\t"));
 					
 				});

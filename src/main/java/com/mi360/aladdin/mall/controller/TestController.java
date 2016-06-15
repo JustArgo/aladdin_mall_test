@@ -20,93 +20,11 @@ import com.mi360.aladdin.shopcar.service.IShopCarService;
 
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/")
 public class TestController {
 
 	@Autowired
-	private IProductService productService;
-	
-	@Autowired
-	private PcIOrderService pcOrderService;
-	
-	@Autowired
 	private ServiceTestMapper serviceTestMapper;
-	
-	@Autowired
-	private IShopCarService shopCarService;
-	
-	@Autowired
-	private IProductVoService productVoService;
-	
-	
-	/**
-	 * 分页查询热销商品
-	 * @return
-	 */
-	@RequestMapping("/product/hotsell")
-	@ResponseBody
-	public Map<String,Object> selectHotSellProduct(String requestId, Integer startIndex, Integer pageSize, String orderBy, String platform){
-		
-		Map<String,Object> retMap = new HashMap<String,Object>();
-		
-		List<Map> ret = productService.selectByKeyWordWithPaginationAddSupplier("", startIndex, pageSize, orderBy, platform, requestId);
-		retMap.put("products", ret);
-		
-		return retMap;
-		
-	}
-	
-	@RequestMapping("/order/search")
-	@ResponseBody
-	public Map<String,Object> searchOrder(String requestId, String mqId, String keyWord, Integer startIndex, Integer pageSize){
-		
-		Map<String,Object> retMap = new HashMap<String,Object>();
-		
-		List<Map<String,Object>> ret = pcOrderService.searchOrder(requestId, mqId, keyWord, startIndex, pageSize);
-		
-		retMap.put("ret",ret);
-		
-		return retMap;
-		
-		
-	}
-	
-	/**
-	 * 添加到购物车
-	 * @return
-	 */
-	@RequestMapping("/shopcar/add")
-	@ResponseBody
-	public Map<String, Object> addToShopCar(String requestId, String mqId, Integer productId, Integer skuId, Integer buyNum){
-		
-		Map<String,Object> retMap = new HashMap<String,Object>();
-		
-		int ret = shopCarService.addToShopCar(mqId, productId, skuId, buyNum, requestId);
-		
-		retMap.put("ret", ret);
-		List<ShopCarProduct> shopCarProducts = shopCarService.getShopCarProducts(mqId, requestId);
-		retMap.put("result", shopCarProducts);
-		
-		return retMap;
-		
-	}
-	
-	@RequestMapping("/product/vo")
-	@ResponseBody
-	public ProductVo  getProductVo(String requestId, Integer productId){
-		
-		return productVoService.getProductVo(productId, requestId);
-		
-	}
-	
-	@RequestMapping("/product/sellcount")
-	@ResponseBody
-	public Integer productSellCount(String requestId, Integer productId, Integer year, Integer month, Integer day){
-		
-		return productService.selectSellCount(requestId, year, month, day, productId);
-		
-	}
-		
 	
 	
 	@RequestMapping("/prepare")
