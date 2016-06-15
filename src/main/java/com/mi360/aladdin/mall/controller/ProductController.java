@@ -133,5 +133,34 @@ public class ProductController {
 		
 	}
 	
+	/**
+	 * 查询我的收藏
+	 * @param requestId
+	 * @param mqId
+	 * @param start
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/get-product-collect")
+	@ResponseBody
+	public List<Map<String,Object>> getProductCollectListByMqID(String requestId, String mqId, Integer start, Integer pageSize){
+		
+		return productCollectService.getProductCollectListByMqID(mqId, start, pageSize, requestId);
+		
+	}
+	
+	/**
+	 * 取消商品收藏
+	 * @param requestId
+	 * @param mqId
+	 * @param productId
+	 * @return
+	 */
+	@RequestMapping("/uncollect")
+	@ResponseBody
+	public int unCollect(String requestId, String mqId, Integer productId){
+		return productService.uncollectProduct(mqId, productId, requestId);
+	}
+	
 	
 }

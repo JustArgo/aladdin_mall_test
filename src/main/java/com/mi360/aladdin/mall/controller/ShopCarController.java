@@ -39,5 +39,37 @@ public class ShopCarController {
 		
 	}
 	
+	/**
+	 * 查看购物车中的商品 查找出sku的价格和购买数量和 图片
+	 * @param requestId
+	 * @param mqId
+	 * @return
+	 */
+	@RequestMapping("/view")
+	@ResponseBody
+	public List<Map<String,Object>> viewShopCar(String requestId, String mqId){
+		
+		return shopCarService.viewShopCar(mqId, requestId);
+		
+	}
+	
+	/**
+	 * 删除购物车中的商品
+	 * @param requestId
+	 * @param mqId
+	 * @return
+	 */
+	@RequestMapping("/remove")
+	@ResponseBody
+	public Map<String,Object> removeShopCarProduct(String requestId, String mqId){
+		
+		Map<String,Object> retMap = new HashMap<String,Object>();
+		
+		List<ShopCarProduct> shopCarProducts = shopCarService.getShopCarProducts(mqId, requestId);
+		retMap.put("result", shopCarProducts);
+		
+		return retMap;
+		
+	}
 	
 }
