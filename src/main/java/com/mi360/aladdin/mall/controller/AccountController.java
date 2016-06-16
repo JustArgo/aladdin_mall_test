@@ -19,12 +19,6 @@ public class AccountController {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	@RequestMapping("/checkWithdrawCondition")
-	@ResponseBody
-	private Map<String, Object> checkWithdrawCondition(String requestId, String type, Long money, String mqId, Integer bankCardId) {
-		return pcAccountService.checkWithdrawCondition(requestId, type, money, mqId, bankCardId);
-	}
-
 	@RequestMapping("/getAccountDetailByDate")
 	@ResponseBody
 	private Map<String, Object> getAccountDetailByDate(String requestId, String mqId, String accountType, String startDate,
