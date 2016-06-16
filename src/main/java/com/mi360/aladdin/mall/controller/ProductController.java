@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mi360.aladdin.comment.domain.Comment;
+import com.mi360.aladdin.comment.service.ICommentService;
 import com.mi360.aladdin.product.domain.ProductAttr;
 import com.mi360.aladdin.product.domain.ProductAttrValue;
 import com.mi360.aladdin.product.domain.ProductDetail;
@@ -29,6 +31,9 @@ public class ProductController {
 	
 	@Autowired
 	private IProductCollectService productCollectService;
+	
+	@Autowired
+	private ICommentService commentService;
 	
 	/**
 	 * 分页查询热销商品
@@ -160,6 +165,23 @@ public class ProductController {
 	@ResponseBody
 	public int unCollect(String requestId, String mqId, Integer productId){
 		return productService.uncollectProduct(mqId, productId, requestId);
+	}
+	
+	/**
+	 * 查询商品图片 有图 无图 
+	 * @param requestId
+	 * @param hasImage
+	 * @param productId
+	 * @param startIndex
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/comment/get")
+	@ResponseBody
+	public List<Comment> getCommentList(String requestId, Integer hasImage, Integer productId, Integer startIndex, Integer pageSize){
+		
+		return commentService.getComment(requestId, productId, hasImage, startIndex, pageSize);
+		
 	}
 	
 	
