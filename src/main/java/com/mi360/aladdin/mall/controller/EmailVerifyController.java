@@ -17,13 +17,13 @@ public class EmailVerifyController {
 
 	@RequestMapping("/send")
 	@ResponseBody
-	private Map<String, Object> send(String requestId, String type, String email) {
+	public Map<String, Object> send(String requestId, String type, String email) {
 		return emailVerifyService.send(requestId, email, type);
 	}
 	
 	@RequestMapping("/verify")
 	@ResponseBody
-	private Map<String, Object> verify(String requestId, String type, String email,String code) {
+	public Map<String, Object> verify(String requestId, String type, String email,String code) {
 		return emailVerifyService.verify(requestId, email, code, type);
 	}
 

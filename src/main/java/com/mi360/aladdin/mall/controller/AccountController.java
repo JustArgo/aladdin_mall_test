@@ -17,11 +17,11 @@ public class AccountController {
 	@Autowired
 	private PcAccountService pcAccountService;
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@RequestMapping("/getAccountDetailByDate")
 	@ResponseBody
-	private Map<String, Object> getAccountDetailByDate(String requestId, String mqId, String accountType, String startDate,
+	public Map<String, Object> getAccountDetailByDate(String requestId, String mqId, String accountType, String startDate,
 			String endDate, int page, int pageSize) throws Exception {
 		return pcAccountService.getAccountDetailByDate(requestId, mqId, accountType, sdf.parse(startDate),
 				sdf.parse(endDate), page, pageSize);
@@ -29,13 +29,13 @@ public class AccountController {
 
 	@RequestMapping("/getAccountInfo")
 	@ResponseBody
-	private Map<String, Object> getAccountInfo(String requestId, String mqId) {
+	public Map<String, Object> getAccountInfo(String requestId, String mqId) {
 		return pcAccountService.getAccountInfo(requestId, mqId);
 	}
 
 	@RequestMapping("/getRemainingSum")
 	@ResponseBody
-	private Map<String, Object> getRemainingSum(String requestId, String mqId) {
+	public Map<String, Object> getRemainingSum(String requestId, String mqId) {
 		return pcAccountService.getRemainingSum(requestId, mqId);
 	}
 

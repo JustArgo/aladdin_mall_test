@@ -17,13 +17,13 @@ public class SmsCodeVerifyController {
 
 	@RequestMapping("/send")
 	@ResponseBody
-	private Map<String, Object> send(String requestId, String type, String phone) {
+	public Map<String, Object> send(String requestId, String type, String phone) {
 		return smsCodeVerifyService.send(requestId, phone, type);
 	}
 
 	@RequestMapping("/verify")
 	@ResponseBody
-	private Map<String, Object> verify(String requestId, String type, String phone, String code) {
+	public Map<String, Object> verify(String requestId, String type, String phone, String code) {
 		return smsCodeVerifyService.verify(requestId, phone, code, type);
 	}
 }
