@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ import com.mi360.aladdin.product.vo.ProductVo;
 @RequestMapping("/product")
 public class ProductController {
 
+	Logger logger = Logger.getLogger(ProductController.class);
+	
 	@Autowired
 	private IProductService productService;
 	
@@ -75,9 +78,9 @@ public class ProductController {
 	 */
 	@RequestMapping("/collect")
 	@ResponseBody
-	public int collectProduct(String requestId, String mqId, Integer id){
+	public int collectProduct(String requestId, String mqId, Integer productId){
 		
-		return productService.collectProduct(mqId, id, requestId);
+		return productService.collectProduct(mqId, productId, requestId);
 		
 	}
 	
@@ -89,9 +92,9 @@ public class ProductController {
 	 */
 	@RequestMapping("/get-attrs")
 	@ResponseBody
-	public List<ProductAttr> getProductAttrByProductID(String requestId, Integer id){
+	public List<ProductAttr> getProductAttrByProductID(String requestId, Integer productId){
 		
-		return productService.getProductAttrByProductID(id, requestId);
+		return productService.getProductAttrByProductID(productId, requestId);
 		
 	}
 	
@@ -179,6 +182,8 @@ public class ProductController {
 	@RequestMapping("/comment/get")
 	@ResponseBody
 	public List<Comment> getCommentList(String requestId, Integer hasImage, Integer productId, Integer startIndex, Integer pageSize){
+		
+		logger.info(hasImage+" "+productId+" "+startIndex+" "+pageSize);
 		
 		return commentService.getComment(requestId, productId, hasImage, startIndex, pageSize);
 		
