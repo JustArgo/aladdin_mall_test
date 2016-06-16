@@ -25,11 +25,11 @@ public class AccountController {
 		return pcAccountService.checkWithdrawCondition(requestId, type, money, mqId, bankCardId);
 	}
 
-	@RequestMapping("/getAccountDetail2")
+	@RequestMapping("/getAccountDetailByDate")
 	@ResponseBody
-	private Map<String, Object> getAccountDetail2(String requestId, String mqId, String accountType, String startDate,
+	private Map<String, Object> getAccountDetailByDate(String requestId, String mqId, String accountType, String startDate,
 			String endDate, int page, int pageSize) throws Exception {
-		return pcAccountService.getAccountDetail2(requestId, mqId, accountType, sdf.parse(startDate),
+		return pcAccountService.getAccountDetailByDate(requestId, mqId, accountType, sdf.parse(startDate),
 				sdf.parse(endDate), page, pageSize);
 	}
 

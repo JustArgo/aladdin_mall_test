@@ -23,8 +23,8 @@ public class UserController {
 
 	@RequestMapping("/createPc")
 	@ResponseBody
-	private Map<String, Object> createPc(String requestId, String password, String phone, String email) {
-		return pcUserService.createPc(requestId, password, phone, email);
+	private Map<String, Object> createPc(String requestId,Integer ivLuckNum, String password, String phone, String email) {
+		return pcUserService.createPc(requestId,ivLuckNum, password, phone, email);
 	}
 
 	@RequestMapping("/existEmail")
