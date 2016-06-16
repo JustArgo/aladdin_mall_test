@@ -36,12 +36,12 @@ public class ProductController {
 	private ICommentService commentService;
 	
 	/**
-	 * 分页查询热销商品
+	 * 查询商品列表 (排序)
 	 * @return
 	 */
-	@RequestMapping("/hotsell")
+	@RequestMapping("/list")
 	@ResponseBody
-	public Map<String,Object> selectHotSellProduct(String requestId, Integer startIndex, Integer pageSize, String orderBy, String platform){
+	public Map<String,Object> selectProductList(String requestId, Integer startIndex, Integer pageSize, String orderBy, String platform){
 		
 		Map<String,Object> retMap = new HashMap<String,Object>();
 		
