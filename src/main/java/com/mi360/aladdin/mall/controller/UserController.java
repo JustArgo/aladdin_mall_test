@@ -14,6 +14,12 @@ import com.mi360.aladdin.user.service.PcUserService;
 public class UserController {
 	@Autowired
 	private PcUserService pcUserService;
+	
+	@RequestMapping("/findSimpleUserInfo")
+	@ResponseBody
+	private Map<String, Object> findSimpleUserInfo(String requestId, String mqId) {
+		return pcUserService.findSimpleUserInfo(requestId, mqId);
+	}
 
 	@RequestMapping("/createPc")
 	@ResponseBody
