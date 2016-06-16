@@ -2,6 +2,7 @@ package com.mi360.aladdin.mall.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class AccountController {
 
 	@RequestMapping("/getAccountDetailByDate")
 	@ResponseBody
-	public Map<String, Object> getAccountDetailByDate(String requestId, String mqId, String accountType, String startDate,
-			String endDate, int page, int pageSize) throws Exception {
+	public Map<String, Object> getAccountDetailByDate(String requestId, String mqId, String accountType,
+			String startDate, String endDate, int page, int pageSize) throws Exception {
 		return pcAccountService.getAccountDetailByDate(requestId, mqId, accountType, sdf.parse(startDate),
 				sdf.parse(endDate), page, pageSize);
 	}
@@ -39,5 +40,12 @@ public class AccountController {
 		return pcAccountService.getRemainingSum(requestId, mqId);
 	}
 
+	@RequestMapping("/applyOfflineRecharge")
+	@ResponseBody
+	public Map<String, Object> applyOfflineRecharge(String requestId, String mqId, int luckNum, long sum,
+			String externalOrderId, String externalOrderTime, String phone, String remark) throws ParseException {
+		return pcAccountService.applyOfflineRecharge(requestId, mqId, luckNum, sum, externalOrderId, sdf.parse(externalOrderTime),
+				phone, remark);
+	}
 
 }
