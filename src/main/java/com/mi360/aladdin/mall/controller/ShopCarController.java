@@ -61,11 +61,14 @@ public class ShopCarController {
 	 */
 	@RequestMapping("/remove")
 	@ResponseBody
-	public Map<String,Object> removeShopCarProduct(String requestId, String mqId){
+	public Map<String,Object> removeShopCarProduct(String requestId, String mqId, Integer[] skuIds){
 		
 		Map<String,Object> retMap = new HashMap<String,Object>();
 		
+		int removeReturn = shopCarService.removeShopCarProduct(mqId, skuIds, requestId);
+		
 		List<ShopCarProduct> shopCarProducts = shopCarService.getShopCarProducts(mqId, requestId);
+		retMap.put("删除返回", removeReturn);
 		retMap.put("result", shopCarProducts);
 		
 		return retMap;
