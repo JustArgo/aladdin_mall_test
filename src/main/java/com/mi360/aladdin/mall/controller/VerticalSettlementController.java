@@ -20,7 +20,7 @@ public class VerticalSettlementController {
 
 	@RequestMapping("/findDailySales")
 	@ResponseBody
-	public Map<String, Object> countMemberAll(String requestId, String mqId, String startDate, String endDate)
+	public Map<String, Object> findDailySales(String requestId, String mqId, String startDate, String endDate)
 			throws ParseException {
 		return pcVerticalSettlementService.findDailySales(requestId, mqId, sdf.parse(startDate), sdf.parse(endDate));
 	}
