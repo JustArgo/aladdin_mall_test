@@ -27,7 +27,7 @@ public class VerticalSettlementController {
 
 	@RequestMapping("/findDailyTopSales")
 	@ResponseBody
-	public Map<String, Object> findDailyTopSales(String requestId, String mqId,String date, int num) throws ParseException {
+	public Map<String, Object> findDailyTopSales(String requestId, String date, int num) throws ParseException {
 		return pcVerticalSettlementService.findDailyTopSales(requestId,sdf.parse(date), num);
 	}
 	
